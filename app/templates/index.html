@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Пользователи</title>
+  <style>
+    body { font-family: sans-serif; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f0f0f0; }
+    img { border-radius: 4px; }
+    .pagination a {
+      margin: 0 4px;
+      text-decoration: none;
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .pagination strong {
+      margin: 0 4px;
+      padding: 4px 8px;
+      border: 1px solid #333;
+      background-color: #333;
+      color: white;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Пользователи</h1>
+
+  <form method="post" action="/load">
+    <label>Сколько пользователей загрузить:</label>
+    <input type="number" name="count" min="1" max="1000" required>
+    <button type="submit">Загрузить</button>
+  </form>
+
+  <p>Всего пользователей: {{ total }}. Страница {{ page }} из {{ pages }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Фото</th>
+        <th>Имя</th>
+        <th>Email</th>
+        <th>Телефон</th>
+        <th>Страна</th>
+        <th>Город</th>
+        <th>Подробнее</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td><img src="{{ user.picture }}" alt="Фото"></td>
+        <td>{{ user.first_name }} {{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.country }}</td>
+        <td>{{ user.city }}</td>
+        <td><a href="/user/{{ user.id }}">Открыть</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="pagination" style="margin-top: 20px;">
+    {% if page > 1 %}
+      <a href="/?skip={{ (page - 2) * limit }}&limit={{ limit }}">« Назад</a>
+    {% endif %}
+
+    {% if page > 3 %}
+      <a href="/?skip=0&limit={{ limit }}">1</a>
+      ...
+    {% endif %}
+
+    {% for p in range(page - 2, page + 3) %}
+      {% if 1 <= p <= pages %}
+        {% if p == page %}
+          <strong>{{ p }}</strong>
+        {% else %}
+          <a href="/?skip={{ (p - 1) * limit }}&limit={{ limit }}">{{ p }}</a>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if page < pages - 2 %}
+      ...
+      <a href="/?skip={{ (pages - 1) * limit }}&limit={{ limit }}">{{ pages }}</a>
+    {% endif %}
+
+    {% if page < pages %}
+      <a href="/?skip={{ page * limit }}&limit={{ limit }}">Вперёд »</a>
+    {% endif %}
+  </div>
+</body>
+</html>

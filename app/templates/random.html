@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Случайный пользователь</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+    img { border-radius: 10px; margin-bottom: 1rem; }
+    .info { margin-bottom: 0.5rem; }
+    a, button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 6px 12px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Случайный пользователь</h1>
+
+  <img src="{{ user.picture }}" alt="Фото">
+  <div class="info"><strong>{{ user.first_name }} {{ user.last_name }}</strong></div>
+  <div class="info"><strong>Email:</strong> {{ user.email }}</div>
+  <div class="info"><strong>Телефон:</strong> {{ user.phone }}</div>
+  <div class="info"><strong>Пол:</strong> {{ user.gender }}</div>
+  <div class="info"><strong>Город:</strong> {{ user.city }}</div>
+  <div class="info"><strong>Страна:</strong> {{ user.country }}</div>
+
+  <form method="get">
+    <button type="submit">Показать другого</button>
+  </form>
+
+  <a href="/">← Назад на главную</a>
+</body>
+</html>

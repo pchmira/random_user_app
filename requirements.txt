@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+aiohttp
+jinja2
+python-dotenv
+alembic
+pytest
+pytest-asyncio
+httpx
+aioresponses
+python-multipart

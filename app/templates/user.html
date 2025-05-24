@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ user.first_name }} {{ user.last_name }}</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; }
+    img { border-radius: 10px; margin-bottom: 1rem; }
+    .info { margin-bottom: 0.5rem; }
+    a { display: inline-block; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+  <img src="{{ user.picture }}" alt="Фото">
+  <div class="info"><strong>Email:</strong> {{ user.email }}</div>
+  <div class="info"><strong>Телефон:</strong> {{ user.phone }}</div>
+  <div class="info"><strong>Пол:</strong> {{ user.gender }}</div>
+  <div class="info"><strong>Город:</strong> {{ user.city }}</div>
+  <div class="info"><strong>Страна:</strong> {{ user.country }}</div>
+
+  <a href="/">← Назад ко всем</a>
+</body>
+</html>
